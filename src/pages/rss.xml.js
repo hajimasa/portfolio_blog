@@ -11,6 +11,7 @@ export async function get(context) {
 		items: response.contents.map((content) => ({
 			title: content.title,
 			link: content.id,
+			pubDate: content.publishedAt,
 		})),
 	});
 }
