@@ -1,12 +1,46 @@
 ---
-import Layout from '../layouts/BlogPost.astro';
+import BaseHead from '../components/BaseHead.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
+
+//microCMS呼び出し
+import { getAbout } from "../library/microcms";
+const about = await getAbout("about");
 ---
 
-<Layout
-	title="About Me"
-	description="hajimemath です。よろしくお願いいたします。"
-	pubDate={new Date('July 04 2023')}
-	updatedDate={new Date('July 04 2023')}
->
-
-</Layout>
+<!DOCTYPE html>
+<html lang="ja">
+	<head>
+		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+		<style>
+		main {
+			margin: auto;
+			padding: 1em;
+			max-width: 60ch;
+		}
+		ul {
+			list-style-type: none;
+			padding: unset;
+		}
+		ul li {
+			display: flex;
+		}
+		ul li :global(time) {
+			flex: 0 0 130px;
+			font-style: italic;
+			color: #595959;
+		}
+		ul li a:visited {
+			color: #8e32dc;
+		}
+		</style>
+	</head>
+	<body>
+		<Header />
+		<main>
+			<div class="post" set:html={about.body}></div>
+		</main>
+		<Footer />
+	</body>
+</html>
