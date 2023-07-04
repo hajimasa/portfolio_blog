@@ -9,7 +9,7 @@ export async function get(context) {
 		description: SITE_DESCRIPTION,
 		site: context.site,
 		items: response.contents.map((content) => ({
-			...content.data,
+			title: `/${content.title}/`,
 			link: `/${content.id}/`,
 		})),
 	});
