@@ -9,8 +9,8 @@ export async function get(context) {
 		description: SITE_DESCRIPTION,
 		site: context.site,
 		items: response.contents.map((content) => ({
-			title: `/${content.title}/`,
-			link: `/${content.id}/`,
+			title: content.title,
+			link: content.id,
 		})),
 	});
 }
