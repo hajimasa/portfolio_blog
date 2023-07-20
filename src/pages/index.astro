@@ -12,40 +12,36 @@ const response = await getBlogs({ fields: ["id", "title", "publishedAt"] });
 
 
 <!DOCTYPE html>
-<html lang="ja">
+<html lang="ja" class="bg-gray-900">
 	<head>
 		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
-		<style>
-			ul {
-				list-style-type: none;
-				padding: unset;
-			}
-			ul li {
-				display: flex;
-			}
-			ul li :global(time) {
-				flex: 0 0 130px;
-				font-style: italic;
-				color: #595959;
-			}
-				ul li a:visited {
-				color: #8e32dc;
-			}
-		</style>
 	</head>
 	<body>
 		<Header />
-		<main>
-			<section>
-				<ul>
-					{
-						response.contents.map((content: any) => (
-							<p>投稿日：{content.publishedAt}</p>
-							<li><a href={`/${content.id}/`}>{content.title}</a></li>
-						))
-					}
-				</ul>
-			</section>
+		<section class="text-gray-400 bg-gray-900 body-font overflow-hidden">
+			<div class="container px-10 py-10 mx-auto">
+			  <div class="-my-8 divide-y-2 divide-gray-800">
+				{
+					response.contents.map((content: any) => (
+						<div class="py-8 flex flex-wrap md:flex-nowrap">
+						  <div class="md:w-64 md:mb-0 mb-6 flex-shrink-0 flex flex-col">
+							<span class="mt-1 text-gray-500 text-sm">{content.publishedAt}</span>
+						  </div>
+						  <div class="md:flex-grow">
+							<h2 class="text-2xl font-medium text-white title-font mb-2">{content.title}</h2>
+							<a href={`/${content.id}/`} class="text-green-400 inline-flex items-center mt-4">見てみる
+							  <svg class="w-4 h-4 ml-2" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+								<path d="M5 12h14"></path>
+								<path d="M12 5l7 7-7 7"></path>
+							  </svg>
+							</a>
+						  </div>
+						</div>
+					))
+				}
+			  </div>
+			</div>
+		  </section>
 		</main>
 		<Footer />
 	</body>

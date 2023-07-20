@@ -3,65 +3,64 @@
   https://github.com/HermanMartinus/bearblog/blob/297026a877bc2ab2b3bdfbd6b9f7961c350917dd/templates/styles/blog/default.css
   License MIT: https://github.com/HermanMartinus/bearblog/blob/master/LICENSE.md
  */
-body {
-	font-family: Verdana, sans-serif;
-	margin: auto;
-	padding: 20px;
-	max-width: 65ch;
-	text-align: left;
-	background-color: #fff;
-	word-wrap: break-word;
-	overflow-wrap: break-word;
-	line-height: 1.5;
-	color: #444;
+
+h1 {
+	font-size: 2.0em !important;
+	margin-bottom: 1.1rem !important;
+    padding-bottom: 0.2em !important;
+    border-bottom: 1px solid #dadada2b !important;
+    margin-top: 2.3em !important;
+	font-weight: 700 !important;
+	line-height: 1.5 !important;
 }
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-strong,
-b {
-	color: #222;
+
+@media screen and (max-width: 576px) {
+	h1 {
+		font-size: 1.6em !important;
+		margin-bottom: 1.1rem !important;
+		padding-bottom: 0.2em !important;
+		border-bottom: 1px solid #dadada2b !important;
+		margin-top: 2.3em !important;
+		font-weight: 700 !important;
+		line-height: 1.5 !important;
+	}
 }
-a {
-	color: #3273dc;
+
+h1:first-child {
+	margin-top: 0 !important;
+	margin-top: 0.4em !important;
 }
-nav a {
-	margin-right: 10px;
+
+h2 {
+	padding-bottom: 0.3em !important;
+    font-size: 1.5em !important;
+    margin-bottom: 1.1rem !important;
+    margin-top: 2.3em !important;
+    border-bottom: 1px solid #dadada2b;
+	font-weight: 700 !important;
+	line-height: 1.5 !important;
 }
-textarea {
-	width: 100%;
-	font-size: 16px;
+
+h3 {
+	font-size: 1.3em !important;
+	margin-top: 2.25em !important;
+    margin-bottom: 0.5em !important;
+	font-weight: 700 !important;
+    line-height: 1.5 !important;
 }
-input {
-	font-size: 16px;
+
+h4 {
+	font-size: 1.2em !important;
+	margin-top: 2.25em !important;
+    margin-bottom: 0.5em !important;
+	font-weight: 700 !important;
+	line-height: 1.5 !important;
 }
-content {
-	line-height: 1.6;
-}
-table {
-	width: 100%;
-}
-img {
-	max-width: 100%;
-	height: auto;
-}
-code {
-	padding: 2px 5px;
-	background-color: #f2f2f2;
-}
-pre {
-	padding: 1rem;
-}
-pre > code {
-	all: unset;
-}
-blockquote {
-	border: 1px solid #999;
-	color: #222;
-	padding: 2px 0px 2px 20px;
-	margin: 0px;
-	font-style: italic;
+
+h5 {
+	font-size: 1em !important;
+	margin-top: 2.25em !important;
+    margin-bottom: 0.5em !important;
+	font-weight: 700 !important;
+	line-height: 1.5 !important;
 }
