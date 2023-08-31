@@ -25,7 +25,7 @@ const blog = await getBlogDetail(slug as string);
 <!DOCTYPE html>
 <html lang="ja">
 	<head>
-		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+		<BaseHead title={blog.title} description={blog.content} />
 	</head>
 	<body class="bg-gray-900">
 		<Header />
