@@ -64,3 +64,8 @@ h5 {
 	font-weight: 700 !important;
 	line-height: 1.5 !important;
 }
+
+main a {
+	color: #a9e718 !important;
+	text-decoration: underline !important;
+}
