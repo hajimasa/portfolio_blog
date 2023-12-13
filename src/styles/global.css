@@ -69,3 +69,21 @@ main a {
 	color: #a9e718 !important;
 	text-decoration: underline !important;
 }
+
+code {
+	font: 12px Monaco,"Courier New","DejaVu Sans Mono","Bitstream Vera Sans Mono",monospace;
+	color: #d3d3d3;
+  
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+  
+	-moz-background-clip: padding;
+	-webkit-background-clip: padding-box;
+	background-clip: padding-box;
+  
+	background-color: #3a3a3a;
+	padding: 0px 3px;
+	display: inline-block;
+	margin: 2px;
+  }
