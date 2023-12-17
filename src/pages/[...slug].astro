@@ -27,7 +27,7 @@ const blog = await getBlogDetail(slug as string);
 	<head>
 		<BaseHead title={blog.title} description={blog.content} />
 	</head>
-	<body class="bg-gray-900">
+	<body class="bg-neutral-950">
 		<Header />
 		<main class="container px-5 py-12 mx-auto">
 			<h1 class="text-2xl font-medium text-white title-font mb-2">{blog.title}</h1>
