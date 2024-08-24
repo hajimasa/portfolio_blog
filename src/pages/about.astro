@@ -13,32 +13,10 @@ const about = await getAbout("about");
 <html lang="ja">
 	<head>
 		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
-		<style>
-		main {
-			margin: auto;
-			padding: 1em;
-			max-width: 60ch;
-		}
-		ul {
-			list-style-type: none;
-			padding: unset;
-		}
-		ul li {
-			display: flex;
-		}
-		ul li :global(time) {
-			flex: 0 0 130px;
-			font-style: italic;
-			color: #595959;
-		}
-		ul li a:visited {
-			color: #8e32dc;
-		}
-		</style>
 	</head>
-	<body class="bg-neutral-950">
+	<body class="flex flex-col min-h-screen bg-gradient-to-br from-[#4CAF50] via-[#8BC34A] to-[#CDDC39] bg-[length:400%_400%] animate-gradient-organic">
 		<Header />
-		<main class="container px-5 py-24 mx-auto">
+		<main class="container px-5 py-24">
 			<div class="text-xl font-medium text-white title-font mb-2" set:html={about.body}></div>
 		</main>
 		<Footer />

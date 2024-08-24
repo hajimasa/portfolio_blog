@@ -7,38 +7,31 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 
 //microCMS呼び出し
 import { getBlogs } from "../library/microcms";
-const response = await getBlogs({ fields: ["id", "title", "publishedAt"] });
+const response = await getBlogs({ fields: ["id", "title", "publishedAt", "thumbnail"] });
 ---
 
 
 <!DOCTYPE html>
-<html lang="ja" class="bg-neutral-950">
+<html lang="ja" class="flex flex-col min-h-screen bg-gradient-to-br from-[#4CAF50] via-[#8BC34A] to-[#CDDC39] bg-[length:400%_400%] animate-gradient-organic">
 	<head>
 		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
 	</head>
 	<body>
 		<Header />
-		<section class="text-gray-400 bg-neutral-950 body-font overflow-hidden">
+		<section class="body-font overflow-hidden">
 			<div class="container px-10 py-10 mx-auto">
-			  <div class="-my-8 divide-y-2 divide-gray-800">
-				{
-					response.contents.map((content: any) => (
-						<div class="py-8 flex flex-wrap md:flex-nowrap">
-						  <div class="md:w-64 md:mb-0 mb-6 flex-shrink-0 flex flex-col">
-							<span class="mt-1 text-gray-500 text-sm">{content.publishedAt}</span>
-						  </div>
-						  <div class="md:flex-grow">
-							<h2 class="text-2xl font-medium text-white title-font mb-2">{content.title}</h2>
-							<a href={`/${content.id}/`} class="text-green-400 inline-flex items-center mt-4">見てみる
-							  <svg class="w-4 h-4 ml-2" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
-								<path d="M5 12h14"></path>
-								<path d="M12 5l7 7-7 7"></path>
-							  </svg>
-							</a>
-						  </div>
-						</div>
-					))
-				}
+			  <div class="-my-8 divide-gray-800">
+                {
+                    response.contents.map((content: any) => (
+                        <a href={`/${content.id}/`} class="block py-8 flex flex-wrap p-6 bg-neutral-100 rounded-lg hover:bg-neutral-500 transition duration-300 mb-2">
+                          <img src={content.thumbnail} alt={content.title} class="w-full h-48 object-cover mb-4 rounded-lg" />
+                          <div class="md:flex-grow">
+                            <h2 class="text-2xl font-medium title-font mb-2">{content.title}</h2>
+                            <p class="leading-relaxed text-base text-gray-400 mb-2">{content.publishedAt}</p>
+                          </div>
+                        </a>
+                    ))
+                }
 			  </div>
 			</div>
 		  </section>
