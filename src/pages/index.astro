@@ -19,11 +19,11 @@ const response = await getBlogs({ fields: ["id", "title", "publishedAt", "thumbn
 	<body>
 		<Header />
 		<section class="body-font overflow-hidden">
-			<div class="container px-10 py-10 mx-auto">
+			<div class="container px-6 py-10 mx-auto">
 			  <div class="-my-8 divide-gray-800">
                 {
                     response.contents.map((content: any) => (
-                        <a href={`/${content.id}/`} class="block py-8 flex flex-wrap p-6 bg-neutral-100 rounded-lg hover:bg-neutral-500 transition duration-300 mb-2">
+                        <a href={`/${content.id}/`} class="block py-8 flex flex-wrap p-6 bg-neutral-100 rounded-lg hover:bg-neutral-500 transition duration-300 mb-4">
                           <img src={content.thumbnail.url} alt={content.title} class="w-full h-48 object-cover mb-4 rounded-lg" />
                           <div class="md:flex-grow">
                             <h2 class="text-2xl font-medium title-font mb-2">{content.title}</h2>
