@@ -17,7 +17,7 @@ const about = await getAbout("about");
 	<body class="flex flex-col min-h-screen bg-gradient-to-br from-[#4CAF50] via-[#8BC34A] to-[#CDDC39] bg-[length:400%_400%] animate-gradient-organic">
 		<Header />
 		<main class="container px-5 py-24">
-			<div class="text-xl font-medium text-white title-font mb-2" set:html={about.body}></div>
+			<div class="text-xl font-medium text-white title-font mb-2" set:html={about.body.replace(/\n/g, '<br>')}></div>
 		</main>
 		<Footer />
 	</body>
