@@ -90,5 +90,9 @@ blockquote {
 	border-left: 9px ridge #dadada56;
 	padding-left: 1em;
 	margin-left: 0;
-	color: #c3c3c3;
+	color: #555;
+}
+
+p {
+	margin: 1em 0;
 }
