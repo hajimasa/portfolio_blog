@@ -20,6 +20,7 @@ export async function getStaticPaths() {
 //記事の詳細情報を取得
 const { slug } = Astro.params;
 const blog = await getBlogDetail(slug as string);
+const ogImage = blog.thumbnail.url ? blog.thumbnail.url : '/default-og-image.png';
 
 import { formatDate } from '../library/Utils'; 
 ---
@@ -27,7 +28,7 @@ import { formatDate } from '../library/Utils';
 <!DOCTYPE html>
 <html lang="ja">
 	<head>
-		<BaseHead title={blog.title} description={blog.content} />
+		<BaseHead title={blog.title} description={blog.content} image={ogImage}/>
 	</head>
 	<body class="bg-neutral-200">
 		<Header />
