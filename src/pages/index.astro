@@ -4,20 +4,15 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 
-// microCMSから記事情報を取得
+
+//microCMS呼び出し
 import { getBlogs } from "../library/microcms";
 const response = await getBlogs({ fields: ["id", "title", "publishedAt", "thumbnail"] });
-import { formatDate } from '../library/Utils'; 
 
-// ページネーション設定
-const url = new URL(Astro.request.url);
-const page = parseInt(url.searchParams.get("page") || "1");
-const itemsPerPage = 5;
-const startIndex = (page - 1) * itemsPerPage;
-const endIndex = page * itemsPerPage;
-const items = response.contents.slice(startIndex, endIndex);
-const totalPages = Math.ceil(response.contents.length / itemsPerPage);
+import { formatDate } from '../library/Utils'; 
 ---
+
+
 <!DOCTYPE html>
 <html lang="ja" class="flex flex-col min-h-screen bg-gradient-to-br from-[#4CAF50] via-[#8BC34A] to-[#CDDC39] bg-[length:400%_400%] animate-gradient-organic">
 	<head>
@@ -28,8 +23,8 @@ const totalPages = Math.ceil(response.contents.length / itemsPerPage);
 		<section class="body-font overflow-hidden">
 			<div class="container px-6 py-10 mx-auto">
 			  <div class="-my-8 divide-gray-800 grid grid-cols-1 md:grid-cols-3 gap-4">
-				{ 
-					items.map((content: any) => (
+				{
+					response.contents.map((content: any) => (
 						<a href={`/${content.id}/`} class="block py-8 flex flex-wrap p-6 bg-neutral-100 rounded-lg hover:bg-slate-300 transition duration-300 mb-4">
 						  <img src={content.thumbnail.url} alt={content.title} class="w-full h-48 object-cover mb-4 rounded-lg" />
 						  <div class="md:flex-grow">
@@ -40,26 +35,9 @@ const totalPages = Math.ceil(response.contents.length / itemsPerPage);
 					))
 				}
 			  </div>
-			  {/* ページネーション */}
-			  <nav class="flex justify-center items-center mt-8 space-x-2">
-			    {page > 1 && (
-			      <a href={`?page=${page - 1}`} class="px-3 py-1 bg-white border border-gray-300 rounded hover:bg-gray-100">
-			        前へ
-			      </a>
-			    )}
-			    {Array.from({ length: totalPages }, (_, i) => i + 1).map((p) => (
-			      <a href={`?page=${p}`} class={`px-3 py-1 border rounded ${p === page ? 'bg-blue-500 text-white' : 'bg-white border-gray-300 hover:bg-gray-100'}`}>
-			        {p}
-			      </a>
-			    ))}
-			    {page < totalPages && (
-			      <a href={`?page=${page + 1}`} class="px-3 py-1 bg-white border border-gray-300 rounded hover:bg-gray-100">
-			        次へ
-			      </a>
-			    )}
-			  </nav>
 			</div>
 		  </section>
+		</main>
 		<Footer />
 	</body>
 </html>
