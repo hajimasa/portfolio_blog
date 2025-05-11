@@ -4,14 +4,35 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 
-
 //microCMS呼び出し
 import { getBlogs } from "../library/microcms";
 const response = await getBlogs({ fields: ["id", "title", "publishedAt", "thumbnail"] });
 
-import { formatDate } from '../library/Utils'; 
+// マーキーアニメーションのスピードを定義
+const marqueeAnimationDuration = "30s";
 ---
 
+<style define:vars={{ marqueeAnimationDuration }}>
+  .marquee-container {
+    position: relative;
+    width: 100%;
+  }
+  
+  .marquee-content {
+    font-weight: bold;
+    font-size: 1.5rem;
+    padding-right: 4rem;
+  }
+  
+  .animate-marquee {
+    animation: marquee var(--marqueeAnimationDuration) linear infinite;
+  }
+  
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-100%); }
+  }
+</style>
 
 <!DOCTYPE html>
 <html lang="ja" class="flex flex-col min-h-screen bg-gradient-to-br from-[#4CAF50] via-[#8BC34A] to-[#CDDC39] bg-[length:400%_400%] animate-gradient-organic">
@@ -20,24 +41,34 @@ import { formatDate } from '../library/Utils';
 	</head>
 	<body>
 		<Header />
+		<div class="w-full bg-[#39FF14] text-black overflow-hidden py-2 border-y-2 border-black">
+			<div class="marquee-container whitespace-nowrap">
+				<div class="marquee-content inline-block animate-marquee">
+					やぁ、hajimemathのブログへようこそ！ やぁ、hajimemathのブログへようこそ！ やぁ、hajimemathのブログへようこそ！ やぁ、hajimemathのブログへようこそ！
+				</div>
+			</div>
+		</div>
 		<section class="body-font overflow-hidden">
-			<div class="container px-6 py-10 mx-auto">
-			  <div class="-my-8 divide-gray-800 grid grid-cols-1 md:grid-cols-3 gap-4">
+			<div class="px-0w-full">
+			  <div class="grid grid-cols-1 md:grid-cols-3 gap-0 w-full">
 				{
-					response.contents.map((content: any) => (
-						<a href={`/${content.id}/`} class="block py-8 flex flex-wrap p-6 bg-neutral-100 rounded-lg hover:bg-slate-300 transition duration-300 mb-4">
-						  <img src={content.thumbnail.url} alt={content.title} class="w-full h-48 object-cover mb-4 rounded-lg" />
-						  <div class="md:flex-grow">
-							<h2 class="text-2xl font-medium title-font mb-2">{content.title}</h2>
-							<p class="leading-relaxed text-base text-gray-400 mb-2">{formatDate(content.publishedAt)}</p>
-						  </div>
+					response.contents.map((content: any, index: number) => (
+						<a href={`/${content.id}/`} class="relative block bg-white overflow-hidden transition duration-300 border-2 border-black hover:border-gray-800 group">
+							<div class="w-full h-64 bg-white">
+								<img src={content.thumbnail.url} alt={content.title} class="w-full h-full object-contain" />
+							</div>
+							<div class="p-6">
+								<h2 class="text-xl font-bold mb-3 line-clamp-2 group-hover:text-gray-800 transition-colors">{content.title}</h2>
+								<div class="absolute bottom-0 right-0">
+									<div class="w-0 h-0 border-t-[30px] border-t-transparent border-r-[30px] border-r-black group-hover:border-r-gray-800 transition-colors"></div>
+								</div>
+							</div>
 						</a>
 					))
 				}
 			  </div>
 			</div>
-		  </section>
-		</main>
+		</section>
 		<Footer />
 	</body>
 </html>
