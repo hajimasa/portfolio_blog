@@ -1,8 +1,4 @@
 ---
-import HeaderLink from './HeaderLink.astro';
-import { SITE_TITLE } from '../consts';
-
-// マーキーアニメーションのスピードを定義
 const marqueeAnimationDuration = "30s";
 ---
 
@@ -31,7 +27,7 @@ const marqueeAnimationDuration = "30s";
 <header class="bg-black body-font">
 	<div class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
 	  <a href="/" class="flex title-font font-medium items-center text-white mb-4 md:mb-0">
-		<span class="ml-3 text-xl">hajimemath blog</span>
+		<span class="ml-3 font-bold text-xl">hajimemath blog</span>
 	  </a>
 	  <nav class="md:mr-auto md:ml-4 md:py-1 md:pl-4 md:border-l md:border-gray-700 flex flex-wrap items-center text-base justify-center text-white">
 		<a href="/about" class="mr-5 hover:bg-neutral-800 px-2 py-1 rounded">hajimemathとは</a>
@@ -50,6 +46,9 @@ const marqueeAnimationDuration = "30s";
 </header>
 <div class="w-full bg-[#39FF14] text-black overflow-hidden py-2 border-y-2 border-black">
 	<div class="marquee-container whitespace-nowrap">
+		<div class="marquee-content inline-block animate-marquee">
+			やぁ、hajimemathのブログへようこそ！ やぁ、hajimemathのブログへようこそ！ やぁ、hajimemathのブログへようこそ！ やぁ、hajimemathのブログへようこそ！
+		</div>
 		<div class="marquee-content inline-block animate-marquee">
 			やぁ、hajimemathのブログへようこそ！ やぁ、hajimemathのブログへようこそ！ やぁ、hajimemathのブログへようこそ！ やぁ、hajimemathのブログへようこそ！
 		</div>
