@@ -1,16 +1,23 @@
 ---
-import '../styles/global.css';
-import BaseHead from '../components/BaseHead.astro';
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
-import FormattedDate from '../components/FormattedDate.astro';
-import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
+import '../../styles/global.css';
+import BaseHead from '../../components/BaseHead.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import FormattedDate from '../../components/FormattedDate.astro';
+import { SITE_TITLE, SITE_DESCRIPTION } from '../../consts';
 
 //microCMS呼び出し
-import { getBlogs } from "../library/microcms";
-const response = await getBlogs({ fields: ["id", "title", "publishedAt", "thumbnail"], limit: 6 });
-const totalResponse = await getBlogs({ fields: ["id"] }); // 総件数取得用
-const totalPages = Math.ceil(totalResponse.totalCount / 6);
+import { getBlogs } from "../../library/microcms";
+
+export async function getStaticPaths({ paginate }: any) {
+  // 全記事を取得
+  const response = await getBlogs({ fields: ["id", "title", "publishedAt", "thumbnail"] });
+  
+  // 6件ごとにページネーション
+  return paginate(response.contents, { pageSize: 6 });
+}
+
+const { page } = Astro.props;
 ---
 
 <style>
@@ -107,7 +114,7 @@ const totalPages = Math.ceil(totalResponse.totalCount / 6);
 <!DOCTYPE html>
 <html lang="ja">
 	<head>
-		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+		<BaseHead title={`${SITE_TITLE} - Page ${page.currentPage}`} description={SITE_DESCRIPTION} />
 	</head>
 	<body>
 		<Header />
@@ -115,7 +122,7 @@ const totalPages = Math.ceil(totalResponse.totalCount / 6);
 			<div class="px-0w-full">
 			  <div class="grid grid-cols-1 md:grid-cols-3 gap-0 w-full">
 				{
-					response.contents.map((content: any, index: number) => (
+					page.data.map((content: any, index: number) => (
 						<a href={`/${content.id}/`} class="relative block bg-white overflow-hidden transition duration-300 border-2 border-black hover:border-gray-800 group">
 							<div class="tooltip">CHECK!</div>
 							<div class="w-full h-64 bg-white">
@@ -138,15 +145,25 @@ const totalPages = Math.ceil(totalResponse.totalCount / 6);
 				}
 			  </div>
 			</div>
+			
 			<!-- ページネーション -->
 			<div class="pagination">
-				<span class="disabled">← 前へ</span>
-				<span class="current">1</span>
-				{totalPages > 1 && Array.from({ length: totalPages - 1 }, (_, i) => i + 2).map((pageNum) => (
-					<a href={`/page/${pageNum}`}>{pageNum}</a>
+				{page.url.prev ? (
+					<a href={page.url.prev}>← 前へ</a>
+				) : (
+					<span class="disabled">← 前へ</span>
+				)}
+				
+				{Array.from({ length: page.lastPage }, (_, i) => i + 1).map((pageNum) => (
+					pageNum === page.currentPage ? (
+						<span class="current">{pageNum}</span>
+					) : (
+						<a href={pageNum === 1 ? "/" : `/page/${pageNum}`}>{pageNum}</a>
+					)
 				))}
-				{totalPages > 1 ? (
-					<a href="/page/2">次へ →</a>
+				
+				{page.url.next ? (
+					<a href={page.url.next}>次へ →</a>
 				) : (
 					<span class="disabled">次へ →</span>
 				)}
