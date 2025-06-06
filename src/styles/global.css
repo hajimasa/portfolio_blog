@@ -80,6 +80,24 @@ code {
 	display: inline-block;
 }
 
+pre {
+	overflow-x: auto;
+	background-color: #3a3a3a;
+	border-radius: 3px;
+	padding: 1em;
+	margin: 1em 0;
+	max-width: 100%;
+}
+
+pre code {
+	background-color: transparent;
+	padding: 0;
+	display: block;
+	white-space: pre;
+	overflow-x: auto;
+	word-wrap: normal;
+}
+
 blockquote {
 	border-left: 9px ridge #dadada56;
 	padding-left: 1em;
