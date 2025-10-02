@@ -8,7 +8,7 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 
 //microCMS呼び出し
 import { getBlogs } from "../library/microcms";
-const response = await getBlogs({ fields: ["id", "title", "publishedAt", "thumbnail"] });
+const response = await getBlogs({ fields: ["id", "title", "publishedAt", "thumbnail"], limit: 100 });
 ---
 
 <style>
